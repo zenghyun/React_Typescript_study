@@ -26,8 +26,9 @@ const EditTodo = ({ callbacks, states }: PropsType) => {
         return;
     }
     const { id, todo, desc, done } = todoOne;
-    callbacks.updateTodo(id, todo, desc, done);
-    navigate("/todos");
+    callbacks.updateTodo(id, todo, desc, done, () => {
+      navigate("/todos");
+    });
   };
 
   return (
