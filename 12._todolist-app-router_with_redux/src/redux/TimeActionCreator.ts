@@ -1,11 +1,15 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const TIME_ACTION = {
-  CHANGE_TIME: "changeTime" as const,
-};
+const timeout = (delayTime: number) =>
+  new Promise((resolve) => setTimeout(resolve, delayTime));
 
-const TimeActionCreator = {
-  changeTime: createAction<{ currentTime: Date }>("changeTime"),
-};
 
-export default TimeActionCreator;
+  const TimeActionCreator = {
+    asyncChangeTime : createAsyncThunk("changeTime",
+    async (_, thunkAPI) => {
+      await timeout(2000);
+      return { currentTime: new Date() };
+    }),
+  };
+
+  export default TimeActionCreator;
